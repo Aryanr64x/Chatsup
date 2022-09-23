@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { supabase } from "../supabase/supabase";
 
 export const authContext = React.createContext();
 
 const AuthContextWrapper = ({ children }) => {
+
+    const [loggedInUser, setLoggedInUser] = useState(null)
+
 
     const signIn = async (phoneNumber) => {
         const resp = await supabase.auth.signInWithOtp({
@@ -27,10 +30,12 @@ const AuthContextWrapper = ({ children }) => {
 
 
 
+
     const value = {
         signIn: signIn,
         verifyOTP: verifyOTP,
-        
+        setLoggedInUser: setLoggedInUser,
+        loggedInUser: loggedInUser 
     };
 
     return (

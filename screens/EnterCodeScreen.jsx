@@ -18,8 +18,12 @@ const EnterCodeScreen = ({ navigation ,route}) => {
             if(!resp.error){
                 const userExists = await checkUserExists(resp.data.user.id)
                 if(userExists){
+
                     navigation.navigate("HomeScreen");
                 }else{
+                   auth.setLoggedInUser({
+                    id: resp.data.user.id
+                   })
                    navigation.navigate("CreateProfile")
                 }
             }else{
@@ -32,7 +36,7 @@ const EnterCodeScreen = ({ navigation ,route}) => {
 
 
     const checkUserExists = async(id)=>{
-        console.log("THIS IS USER ID"+ id);
+        
         const resp = await supabase.from('profiles').select().eq('user_id', id);
         if(resp.data.length != 0){
             return true;
