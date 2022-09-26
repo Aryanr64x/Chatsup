@@ -16,14 +16,17 @@ const EnterCodeScreen = ({ navigation ,route}) => {
             const resp  = await auth.verifyOTP(token, route.params.paramKey) 
            
             if(!resp.error){
-                const userExists = await checkUserExists(resp.data.user.id)
-                if(userExists){
-
-                    navigation.navigate("HomeScreen");
-                }else{
-                   auth.setLoggedInUser({
+                auth.setLoggedInUser({
                     id: resp.data.user.id
                    })
+                const respProfile = await checkUserExists(resp.data.user.id)
+                
+                if(respProfile){
+                    auth.setLoggedInUser({id: resp.data.user.id, profile: respProfile})
+                    console.log(auth.loggedInUser)
+                    navigation.navigate("HomeScreen");
+                }else{
+                   
                    navigation.navigate("CreateProfile")
                 }
             }else{
@@ -38,11 +41,12 @@ const EnterCodeScreen = ({ navigation ,route}) => {
     const checkUserExists = async(id)=>{
         
         const resp = await supabase.from('profiles').select().eq('user_id', id);
+        
         if(resp.data.length != 0){
-            return true;
+            return resp.data[0];
         }
 
-        return false;
+        return null;
     }
 
 
