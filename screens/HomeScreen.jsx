@@ -17,7 +17,7 @@ const HomeScreen = ()=>{
          <View>
              <View style={styles.appBar}>
                     <Text style={styles.appBarText}>
-                        { auth.loggedInUser.profile.username }
+                        { auth.loggedInUser.username }
                     </Text>
              </View>
              <View style={styles.navView}>

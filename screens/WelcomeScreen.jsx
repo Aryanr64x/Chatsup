@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 const WelcomeScreen = ( { navigation } ) => {
 
     const onPress = ()=>{
-        navigation.navigate('EnterNumber');
+        navigation.navigate('AuthScreen');
     }
 
     return (

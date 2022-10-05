@@ -13,6 +13,7 @@
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
     "@supabase/supabase-js": "^2.0.0-rc.10",
+    "axios": "^1.0.0",
     "base64-arraybuffer": "^1.0.2",
     "expo": "~46.0.9",
     "expo-image-picker": "~13.3.1",

@@ -54,7 +54,7 @@ const EnterCodeScreen = ({ navigation ,route}) => {
         <View style={styles.wrapper}>
             <Text style={styles.headerText}> Enter 6 digit code sent to your phone number </Text>
             <Text style={styles.headerText}>  { seconds } </Text>
-            <TextInput onChangeText={(val) => { setToken(val) }} keyboardType="number-pad" placeholder="Enter the verification Code" style={styles.numberInput} />
+            <TextInput  onChangeText={(val) => { setToken(val) }} keyboardType="number-pad" placeholder="Enter the verification Code" style={styles.numberInput} />
             <View style={styles.buttonWrapper}>
                 <TouchableOpacity style={styles.button} onPress={onPress}><Text style={styles.buttonText} > VERIFY CODE </Text></TouchableOpacity>
 

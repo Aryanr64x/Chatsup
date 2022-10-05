@@ -7,6 +7,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import AuthContextWrapper from './contexts/AuthContext';
 import HomeScreen from './screens/HomeScreen';
 import CreateProfileScreen from './screens/CreateProfileScreen';
+import AuthScreen from './screens/AuthScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="EnterCode" component={EnterCodeScreen} options={{headerShown: false}}/>
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name="CreateProfile" component={CreateProfileScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="AuthScreen" component={AuthScreen} options={{headerShown: false}}/>
 
 
       </Stack.Navigator>
