@@ -1,23 +1,38 @@
-import { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native"
+import { useContext, useEffect, useState } from "react";
+import { View, Text, FlatList, ToastAndroid } from "react-native"
 import { supabase } from "../supabase/supabase";
+import axios from "axios";
 import SingleUserList from "./SingleUserList";
 
+import BASE_URL from "../BASE_URL.js";
+import { authContext } from "../contexts/AuthContext";
 
 const UsersSection = () => {
     const [userProfiles, setUserProfiles] = useState([])
+    const auth = useContext(authContext)
+    
     useEffect(() => {
-        getUserProfiles()
+        getUsers()
     }, [])
 
-    const getUserProfiles = async () => {
-        const resp = await supabase.from('profiles').select()
-        if (!resp.error) {
-            setUserProfiles(resp.data)
+    const getUsers = async () => {
+        try{
+            const resp = await axios.get(BASE_URL+'/api/users/', {headers:{
+                Authorization: "Bearer " +auth.token 
+
+            }});
             console.log(resp.data)
+            setUserProfiles(resp.data.users)
+
+        }catch(e){
+            console.log(e)
+            ToastAndroid.show("Oops cannot get users at the moment ! Try again later", ToastAndroid.LONG)
         }
 
     }
+
+
+    
 
     return (
         <View>

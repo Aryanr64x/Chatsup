@@ -14,7 +14,7 @@ const AuthContextWrapper = ({ children }) => {
 
 
     const value = {
-        setToken,setLoggedInUser, loggedInUser
+        setToken,setLoggedInUser, loggedInUser, token
     };
 
     return (

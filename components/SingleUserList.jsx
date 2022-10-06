@@ -6,7 +6,7 @@ const SingleUserList = ({ user })=>{
         <View style={styles.itemWrapper}>
             <View>
                     <Image  style={styles.avatarImage} source={{
-                        uri: 'https://jfwhcicxwmmlgjtotzln.supabase.co/storage/v1/object/public/avatars/'+user.avatar_url
+                        uri: 'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-set-image-stock-isolated-object-icon-collection-137161298.jpg'
                     }} />
             </View>
             <View>
