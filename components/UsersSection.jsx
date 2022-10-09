@@ -7,7 +7,7 @@ import SingleUserList from "./SingleUserList";
 import BASE_URL from "../BASE_URL.js";
 import { authContext } from "../contexts/AuthContext";
 
-const UsersSection = () => {
+const UsersSection = ( { navigation } ) => {
     const [userProfiles, setUserProfiles] = useState([])
     const auth = useContext(authContext)
     
@@ -44,7 +44,7 @@ const UsersSection = () => {
                 <FlatList  keyExtractor={(item)=>item.id} data={userProfiles} renderItem={({item}) => {
                     return (
                             
-                       <SingleUserList  user = {item} />
+                       <SingleUserList  user = {item} navigation={navigation}/>
                     )
                 }} />
                 )

@@ -1,9 +1,30 @@
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, TouchableOpacity, ActionSheetIOS } from "react-native"
+import axios from "axios"
+import { authContext } from "../contexts/AuthContext";
+import BASE_URL from "../BASE_URL";
+import { useContext } from "react";
+const SingleUserList = ({ user , navigation})=>{
+    const auth = useContext(authContext)
+    const createChatRoom = async()=>{
+        // Ofc we wanna check first whether chatroom exists or not 
+        try{
+            const response = await axios.post(BASE_URL+'/api/chatrooms/',{
+                otheruser:user
+            },{headers:{
+                Authorization: "Bearer " +auth.token 
 
-const SingleUserList = ({ user })=>{
-    console.log('https://jfwhcicxwmmlgjtotzln.supabase.co/storage/v1/object/public/avatars/'+user.avatar_url)
+            }});
+            console.log(response.data)
+            navigation.navigate('ChatScreen', response.data)
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+
     return (
-        <View style={styles.itemWrapper}>
+       <TouchableOpacity onPress={createChatRoom}>
+         <View style={styles.itemWrapper}>
             <View>
                     <Image  style={styles.avatarImage} source={{
                         uri: 'https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-set-image-stock-isolated-object-icon-collection-137161298.jpg'
@@ -14,14 +35,15 @@ const SingleUserList = ({ user })=>{
                     { user.username }
                 </Text>
             </View>
-        </View>
+        </View>          
+       </TouchableOpacity>             
     )
 }
 
 
 const styles = StyleSheet.create({
     itemWrapper:{
-        display: 'flex',
+        display: 'flex',                                                                           
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,

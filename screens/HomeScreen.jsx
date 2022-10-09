@@ -6,7 +6,7 @@ import UsersSection from "../components/UsersSection";
 import { authContext } from "../contexts/AuthContext";
 
 
-const HomeScreen = ()=>{   
+const HomeScreen = ( { navigation } )=>{   
 
     // 0 is for chats section and 1 is for users 
     const [section, setSection] = useState(0) 
@@ -35,7 +35,7 @@ const HomeScreen = ()=>{
                 </View>
              </View>
             {
-                (section === 0) ? (<ChatsSection />) : (<UsersSection />)
+                (section === 0) ? (<ChatsSection />) : (<UsersSection navigation={navigation}/>)
             }
         </View>
        </SafeAreaView>

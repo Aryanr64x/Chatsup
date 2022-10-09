@@ -1,5 +1,6 @@
 import axios from "axios";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ToastAndroid } from "react-native";
+import BASE_URL from "../BASE_URL";
 import formStyles from "../styles/form";
 
 const SignUp = ({ setShowSignIn, onAuthenticated }) => {
@@ -23,7 +24,7 @@ const SignUp = ({ setShowSignIn, onAuthenticated }) => {
 
         try {
 
-            const resp = await axios.post('https://6475-2405-201-a409-c204-9cfd-cc7c-f281-f067.ngrok.io/api/auth/signup', {
+            const resp = await axios.post(BASE_URL+'/api/auth/signup', {
                 username, email, password, password_confirm
             })
             onAuthenticated(resp.data)
