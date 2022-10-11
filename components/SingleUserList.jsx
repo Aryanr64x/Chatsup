@@ -3,21 +3,24 @@ import axios from "axios"
 import { authContext } from "../contexts/AuthContext";
 import BASE_URL from "../BASE_URL";
 import { useContext } from "react";
-const SingleUserList = ({ user , navigation})=>{
+const SingleUserList = ({ user , navigation, chatroom})=>{
     const auth = useContext(authContext)
     const createChatRoom = async()=>{
-        // Ofc we wanna check first whether chatroom exists or not 
-        try{
-            const response = await axios.post(BASE_URL+'/api/chatrooms/',{
-                otheruser:user
-            },{headers:{
-                Authorization: "Bearer " +auth.token 
-
-            }});
-            console.log(response.data)
-            navigation.navigate('ChatScreen', response.data)
-        }catch(e){
-            console.log(e)
+        if(!chatroom){
+            try{
+                const response = await axios.post(BASE_URL+'/api/chatrooms/',{
+                    otheruser:user
+                },{headers:{
+                    Authorization: "Bearer " +auth.token 
+    
+                }});
+                console.log(response.data)
+                navigation.navigate('ChatScreen', response.data)
+            }catch(e){
+                console.log(e)
+            }
+        }else{
+            navigation.navigate('ChatScreen', chatroom)
         }
     }
 

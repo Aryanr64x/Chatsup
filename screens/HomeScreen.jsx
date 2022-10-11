@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ChatsSection from "../components/ChatsSection";
 import UsersSection from "../components/UsersSection";
 import { authContext } from "../contexts/AuthContext";
-
+import appbar from "../styles/appbar";
 
 const HomeScreen = ( { navigation } )=>{   
 
@@ -35,7 +35,7 @@ const HomeScreen = ( { navigation } )=>{
                 </View>
              </View>
             {
-                (section === 0) ? (<ChatsSection />) : (<UsersSection navigation={navigation}/>)
+                (section === 0) ? (<ChatsSection  navigation={navigation} />) : (<UsersSection navigation={navigation}/>)
             }
         </View>
        </SafeAreaView>
@@ -43,19 +43,7 @@ const HomeScreen = ( { navigation } )=>{
 }
 
 const styles = StyleSheet.create({
-    appBar:{
-        backgroundColor: "teal",
-        height: 75,
-        shadowColor: 'black',
-        display: 'flex',    
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 20
-    },
-    appBarText:{
-        color: 'white',
-        fontSize: 24
-    },
+   ...appbar,
     navView:{
         display: 'flex',
         flexDirection: 'row',
