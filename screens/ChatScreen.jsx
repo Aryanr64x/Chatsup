@@ -6,10 +6,13 @@ import BASE_URL from '../BASE_URL.js'
 import { authContext } from "../contexts/AuthContext";
 import axios from 'axios'
 import MyMessage from "../components/MyMessage";
+import { socketContext } from "../contexts/SocketContextWrapper";
 import OthersMessage from "../components/OthersMessage";
+
 const ChatScreen = ({ route }) => {
     const auth = useContext(authContext)
     const chatroom = route.params;
+    const io = useContext(socketContext)
     const [text, setText] = useState("")
     const [messages, setMessages] = useState([])
     const request_headers = {
@@ -20,6 +23,10 @@ const ChatScreen = ({ route }) => {
     };
     useEffect(()=>{
         getMessages();
+        io.socket.emit('join-room', { roomname:chatroom._id });
+        io.socket.on('new-message', (text)=>{
+            setMessages([...messages,text])
+        })
     }, [])
 
     const getMessages = async()=>{
@@ -40,9 +47,12 @@ const ChatScreen = ({ route }) => {
                     text: text,
                     sender_id: auth.loggedInUser._id
                 }, request_headers)
+                io.socket.emit('new-message', { text:text , roomname: chatroom._id})
                setMessages([...messages, resp.data])
+
             } catch (e) {
                 console.log(e)
+
             }
         }
     }
@@ -66,7 +76,7 @@ const ChatScreen = ({ route }) => {
 }
 
 const styles = StyleSheet.create({
-    // flexbox in react native dekhna hai to dekhna hai 
+
     ...appbar, ...form,
     chatwrapper: {
 
