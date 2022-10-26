@@ -1,7 +1,9 @@
 {
   "expoServerNgrokUrl": "https://76-8y5.anonymous.chatsup.exp.direct",
   "packagerNgrokUrl": "https://76-8y5.anonymous.chatsup.exp.direct",
-  "ngrokPid": 25720,
+  "ngrokPid": 18596,
   "expoServerPort": null,
-  "packagerPort": 19000
+  "packagerPort": 19000,
+  "packagerPid": null,
+  "webpackServerPort": null
 }

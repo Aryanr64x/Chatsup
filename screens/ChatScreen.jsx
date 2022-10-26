@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, Button } from "react-native";
+import { View, Text, StyleSheet, FlatList, Dimensions, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import appbar from "../styles/appbar";
 import form from '../styles/form'
 import BASE_URL from '../BASE_URL.js'
@@ -8,6 +8,7 @@ import axios from 'axios'
 import MyMessage from "../components/MyMessage";
 import { socketContext } from "../contexts/SocketContextWrapper";
 import OthersMessage from "../components/OthersMessage";
+import { Ionicons } from '@expo/vector-icons';
 
 const ChatScreen = ({ route }) => {
     const auth = useContext(authContext)
@@ -25,6 +26,7 @@ const ChatScreen = ({ route }) => {
         getMessages();
         io.socket.emit('join-room', { roomname:chatroom._id });
         io.socket.on('new-message', (text)=>{
+            console.log("This is all that is needed");
             setMessages([...messages,text])
         })
     }, [])
@@ -68,7 +70,9 @@ const ChatScreen = ({ route }) => {
                 }}/>
                 <View style={styles.chatbottom}>
                     <TextInput onChangeText={(val) => { setText(val) }} style={styles.numberInput} placeholder="Enter  a message ..." />
-                    <Button title="Send" onPress={sendMessage} />
+                    <TouchableOpacity style={styles.sendButton} onPress={sendMessage} >
+                        <Ionicons name="send" size={24} style={styles.sendButtonIcon} />
+                    </TouchableOpacity>
                 </View>
 
             </View>
@@ -77,14 +81,24 @@ const ChatScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
 
-    ...appbar, ...form,
+    ...appbar, 
     chatwrapper: {
 
         height: (Dimensions.get('window').height - 45)
 
 
     },
+   
     chatlist: {
+
+    },
+  
+    chatbottom: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
 
     },
     numberInput: {
@@ -93,13 +107,19 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         marginTop: 0,
         flexGrow: 1,
+        borderRadius: 10,
+        elevation: 4,
     },
-    chatbottom: {
-        display: 'flex',
-        flexDirection: 'row',
-        backgroundColor: 'red',
-        alignItems: 'stretch',
-
+    sendButton:{
+        backgroundColor: 'teal',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        marginLeft: 5,
+        borderRadius: 100,
+        elevation: 4
+    },
+    sendButtonIcon:{
+        color: 'white'
     }
 })
 

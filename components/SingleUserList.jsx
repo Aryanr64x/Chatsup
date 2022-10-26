@@ -50,17 +50,21 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: 10,
-        marginTop: 10
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'white', 
     },  
     avatarImage:{
-        width: 55,
-        height: 55,
+        width: 50,
+        height: 50,
         borderRadius: 100,
-        marginRight: 10
+        marginRight: 10,
+        borderWidth: 1,
+        borderColor: 'teal'
     },
     itemText:{
         fontSize: 24,
-        fontWeight: '100'
+        fontWeight: '400'
     }
 })
 
